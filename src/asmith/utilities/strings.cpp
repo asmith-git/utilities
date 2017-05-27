@@ -392,55 +392,6 @@ namespace asmith { namespace strings {
 	}
 
 	/*!
-		\brief Search for the first instance of a sub-string.
-		\param aStr The string to search.
-		\param aTarget The string to search for.
-		\return The position of the matching substring or nullptr if a match was not found.
-	*/
-	const char* find_substring(const char* aStr, const char* aTarget) throw() {
-		return find_substring(aStr, strlen(aStr), aTarget, strlen(aTarget));
-	}
-
-	/*!
-		\brief Search for the first instance of a sub-string.
-		\param aStr The string to search.
-		\param aStrSize The size of aStr.
-		\param aTarget The string to search for.
-		\return The position of the matching substring or nullptr if a match was not found.
-	*/
-	const char* find_substring(const char* aStr, size_t aStrSize, const char* aTarget) throw() {
-		return find_substring(aStr, aStrSize, aTarget, strlen(aTarget));
-	}
-
-	/*!
-		\brief Search for the first instance of a sub-string.
-		\param aStr The string to search.
-		\param aTarget The string to search for.
-		\param aTargetSize The size of aTarget.
-		\return The position of the matching substring or nullptr if a match was not found.
-	*/
-	const char* find_substring(const char* aStr, const char* aTarget, size_t aTargetSize) throw() {
-		return find_substring(aStr, strlen(aStr), aTarget, aTargetSize);
-	}
-
-	/*!
-		\brief Search for the first instance of a sub-string.
-		\param aStr The string to search.
-		\param aStrSize The size of aStr.
-		\param aTarget The string to search for.
-		\param aTargetSize The size of aTarget.
-		\return The position of the matching substring or nullptr if a match was not found.
-	*/
-	const char* find_substring(const char* aStr, size_t aStrSize, const char* aTarget, size_t aTargetSize) throw() {
-		while(aStrSize >= aTargetSize) {
-			if(memcmp(aStr, aTarget, aTargetSize) == 0) return aStr;
-			++aStr;
-			--aStrSize;
-		}
-		return nullptr;
-	}
-
-	/*!
 		\brief Search for the first instance of any characters in a set.
 		\param aStr The string to search.
 		\param aTargets The characters to search for.
