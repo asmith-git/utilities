@@ -14,7 +14,7 @@
 #include "asmith/utilities/strings.hpp"
 #include <cstring>
 
-namespace asmith {
+namespace asmith { namespace strings {
 
 	enum : char {
 		CASE_DIFFERENCE = 'A' - 'a'
@@ -487,4 +487,4 @@ namespace asmith {
 		return nullptr;
 	}
 
-}
+}}

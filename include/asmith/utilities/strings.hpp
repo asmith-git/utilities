@@ -14,7 +14,8 @@
 #ifndef ASMITH_UTILITIES_STRINGS_HPP
 #define ASMITH_UTILITIES_STRINGS_HPP
 
-namespace asmith {
+namespace asmith { namespace strings {
+
 	char to_upper_case(char) throw();
 	void to_upper_case(char*) throw();
 	void to_upper_case(char*, size_t) throw();
@@ -61,5 +62,5 @@ namespace asmith {
 	const char* find_any(const char*, size_t, const char*) throw();
 	const char* find_any(const char*, const char*, size_t) throw();
 	const char* find_any(const char*, size_t, const char*, size_t) throw();
-}
+}}
 #endif
