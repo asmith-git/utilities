@@ -56,5 +56,10 @@ namespace asmith {
 	const char* find_substring(const char*, size_t, const char*) throw();
 	const char* find_substring(const char*, const char*, size_t) throw();
 	const char* find_substring(const char*, size_t, const char*, size_t) throw();
+
+	const char* find_any(const char*, const char*) throw();
+	const char* find_any(const char*, size_t, const char*) throw();
+	const char* find_any(const char*, const char*, size_t) throw();
+	const char* find_any(const char*, size_t, const char*, size_t) throw();
 }
 #endif
