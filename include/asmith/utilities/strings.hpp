@@ -49,5 +49,12 @@ namespace asmith {
 
 	int strcmp_ignore_case(const char*, const char*) throw();
 	int strcmp_ignore_case(const char*, const char*, size_t) throw();
+
+	const char* find_substring(const char*, char) throw();
+	const char* find_substring(const char*, size_t, char) throw();
+	const char* find_substring(const char*, const char*) throw();
+	const char* find_substring(const char*, size_t, const char*) throw();
+	const char* find_substring(const char*, const char*, size_t) throw();
+	const char* find_substring(const char*, size_t, const char*, size_t) throw();
 }
 #endif
