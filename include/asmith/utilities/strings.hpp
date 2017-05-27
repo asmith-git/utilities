@@ -16,22 +16,6 @@
 
 namespace asmith { namespace strings {
 
-	enum {
-		NUMBER_COUNT = 10,
-		LETTER_COUNT = 26,
-		VOWEL_COUNT = 5,
-		CONSONANT_COUNT = LETTER_COUNT - VOWEL_COUNT
-	};
-
-	static constexpr const char* const NUMBERS = "0123456789aeioubcdfghjklmnpqrstvwxyzAEIOUBCDFGHJKLMNPQRSTVWXYZ";
-	static constexpr const char* const LETTERS = NUMBERS + NUMBER_COUNT;
-	static constexpr const char* const LOWER_CASE_LETTERS = LETTERS;
-	static constexpr const char* const UPPER_CASE_LETTERS = LETTERS + LETTER_COUNT;
-	static constexpr const char* const LOWER_CASE_VOWELS = LOWER_CASE_LETTERS;
-	static constexpr const char* const UPPER_CASE_VOWELS = UPPER_CASE_LETTERS;
-	static constexpr const char* const LOWER_CASE_CONSONANTS = LOWER_CASE_VOWELS + VOWEL_COUNT;
-	static constexpr const char* const UPPER_CASE_CONSONANTS = UPPER_CASE_VOWELS + VOWEL_COUNT;
-
 	char to_upper_case(char) throw();
 	void to_upper_case(char*) throw();
 	void to_upper_case(char*, size_t) throw();
