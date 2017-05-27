@@ -113,5 +113,15 @@ namespace asmith {
 
 	// CRC-32
 	typedef crc<uint32_t,	0x04C11DB7,	true,	true,	0xFFFFFFFF,	0xFFFFFFFF> crc_32;
+	typedef crc<uint32_t,	0x04C11DB7, false,	 true,	0xFFFFFFFF,	0x00000000> crc_32_bzip2;   //!\bug Wrong checksum on test      
+	typedef crc<uint32_t,	0x1EDC6F41, true ,	 true,	0x00000000,	0xFFFFFFFF> crc_32c;        //!\bug Wrong checksum on test  
+	typedef crc<uint32_t,	0xA833982B, true ,	 true,	0x00000000,	0xFFFFFFFF> crc_32d;     	//!\bug Wrong checksum on test     
+	typedef crc<uint32_t,	0x04C11DB7, false,	 true,	0xFFFFFFFF,	0x00000000> crc_32_mpeg;          
+	typedef crc<uint32_t,	0x04C11DB7, false,	 true,	0xFFFFFFFF,	0xFFFFFFFF> crc_posix;		//!\bug Wrong checksum on test
+	typedef crc<uint32_t,	0x814141AB, false,	 true,	0x00000000,	0x00000000> crc_32q;          
+	typedef crc<uint32_t,	0x04C11DB7, true ,	 true,	0xFFFFFFFF,	0x00000000> crc_jamcrc;
+	typedef crc<uint32_t,	0x000000AF, false,	 true,	0x00000000,	0x00000000> crc_xfer;
+
+	// CRC definitions taken from http://crcmod.sourceforge.net/crcmod.predefined.html
 }
 #endif
