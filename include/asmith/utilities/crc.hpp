@@ -91,6 +91,21 @@ namespace asmith {
 	typedef crc<uint8_t,	0x07,		true,	true,	0xFF,		0x00>	crc_8_rohc;
 	typedef crc<uint8_t,	0x9B,		true,	true,	0x00,		0x00>	crc_8_wcdma;
 
+	// CRC-16
+	typedef crc<uint16_t,	0x8005,		true,	true,	0x0000,		0x0000> crc_16;
+	typedef crc<uint16_t,	0x8005,		false,	true,	0x0000,		0x0000> crc_16_buypass;
+	typedef crc<uint16_t,	0x8005,		false,	true,	0x800D,		0x0000> crc_16_dds_110;
+	typedef crc<uint16_t,	0x0589,		false,	true,	0x0001,		0x0001> crc_16_dect;	//!\bug Wrong checksum on test
+	typedef crc<uint16_t,	0x3D65,		true,	true,	0xFFFF,		0xFFFF> crc_16_dnp;		//!\bug Wrong checksum on test
+	typedef crc<uint16_t,	0x3D65,		false,	true,	0xFFFF,		0xFFFF> crc_16_en_13757;//!\bug Wrong checksum on test
+	typedef crc<uint16_t,	0x1021,		false,	true,	0x0000,		0xFFFF> crc_16_genibus;	//!\bug Wrong checksum on test
+	typedef crc<uint16_t,	0x8005,		true,	true,	0xFFFF,		0xFFFF> crc_16_maxim;	//!\bug Wrong checksum on test
+	typedef crc<uint16_t,	0x1021,		true,	true,	0xFFFF,		0x0000> crc_16_mcrf4xx;
+	typedef crc<uint16_t,	0x1021,		true,	true,	0x554D,		0x0000> crc_16_riello;
+	typedef crc<uint16_t,	0x8BB7,		false,	true,	0x0000,		0x0000> crc_16_t10_dif;
+	typedef crc<uint16_t,	0xA097,		false,	true,	0x0000,		0x0000> crc_16_teledisk;
+	typedef crc<uint16_t,	0x8005,		true,	true,	0x0000,		0xFFFF> crc_16_usb;		//!\bug Wrong checksum on test
+
 	// CRC-32
 	typedef crc<uint32_t,	0x04C11DB7,	true,	true,	0xFFFFFFFF,	0xFFFFFFFF> crc_32;
 }
