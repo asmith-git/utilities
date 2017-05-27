@@ -122,6 +122,11 @@ namespace asmith {
 	typedef crc<uint32_t,	0x04C11DB7, true ,	 true,	0xFFFFFFFF,	0x00000000> crc_jamcrc;
 	typedef crc<uint32_t,	0x000000AF, false,	 true,	0x00000000,	0x00000000> crc_xfer;
 
+	// CRC-64
+	typedef crc<uint64_t,	0x000000000000001BUL,	true, false,	0x0000000000000000UL,	0x0000000000000000UL> crc_64;		//!\bug Unknown error
+	typedef crc<uint64_t,	0x42F0E1EBA9EA3693UL,	false, false,	0x0000000000000000UL,	0xFFFFFFFFFFFFFFFFUL> crc_64_we;	//!\bug Unknown error
+	typedef crc<uint64_t,	0xAD93D23594C935A9UL,	true, false,	0xFFFFFFFFFFFFFFFFUL,	0x0000000000000000UL> crc_64_jones;	//!\bug Unknown error
+
 	// CRC definitions taken from http://crcmod.sourceforge.net/crcmod.predefined.html
 }
 #endif
