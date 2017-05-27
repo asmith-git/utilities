@@ -48,5 +48,6 @@ namespace asmith {
 	bool is_number(const char*, size_t) throw();
 
 	int strcmp_ignore_case(const char*, const char*) throw();
+	int strcmp_ignore_case(const char*, const char*, size_t) throw();
 }
 #endif

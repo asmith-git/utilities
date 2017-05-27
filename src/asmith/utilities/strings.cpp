@@ -172,4 +172,15 @@ namespace asmith {
 		return *aStr2 == '\0' ? 0 : 1;
 	}
 
+	int strcmp_ignore_case(const char* aStr1, const char* aStr2, size_t aSize) throw() {
+		for(size_t i = 0; i < aSize; ++i){
+			if(aStr1[i] == '\0') aStr2[i] == '\0' ? 0 : 1;;
+			const char a = to_lower_case(aStr1[i]);
+			const char b = to_lower_case(aStr2[i]);
+			if(a < b) return -1;
+			else if(a > b) return 1;
+		}
+		return 0;
+	}
+
 }
