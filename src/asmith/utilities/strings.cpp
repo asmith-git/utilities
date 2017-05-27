@@ -296,7 +296,7 @@ namespace asmith { namespace strings {
 			const char a = to_lower_case(*aStr1);
 			const char b = to_lower_case(*aStr2);
 			if(a < b) return -1;
-			else if (a > b) return 1;
+			else if(a > b) return 1;
 			++aStr1;
 			++aStr2;
 		}
@@ -443,8 +443,8 @@ namespace asmith { namespace strings {
 	}
 
 	const char* find_number(const char* aStr, size_t aSize) throw() {
-		//! \todo Optimise
-		return find_any(aStr, aSize, NUMBERS, NUMBER_COUNT);
+		for(size_t i = 0; i < aSize; ++i) if(is_number(aStr[i])) return aStr + i;
+		return nullptr;
 	}
 
 	const char* find_letter(const char* aStr) throw() {
@@ -452,8 +452,8 @@ namespace asmith { namespace strings {
 	}
 
 	const char* find_letter(const char* aStr, size_t aSize) throw() {
-		//! \todo Optimise
-		return find_any(aStr, aSize, LETTERS, LETTER_COUNT * 2);
+		for(size_t i = 0; i < aSize; ++i) if(is_letter(aStr[i])) return aStr + i;
+		return nullptr;
 	}
 
 	const char* find_lower_case_letter(const char* aStr) throw() {
@@ -461,8 +461,8 @@ namespace asmith { namespace strings {
 	}
 
 	const char* find_lower_case_letter(const char* aStr, size_t aSize) throw() {
-		//! \todo Optimise
-		return find_any(aStr, aSize, LOWER_CASE_LETTERS, LETTER_COUNT);
+		for(size_t i = 0; i < aSize; ++i) if(is_lower_case(aStr[i]) && is_letter(aStr[i])) return aStr + i;
+		return nullptr;
 	}
 
 	const char* find_upper_case_letter(const char* aStr) throw() {
@@ -470,8 +470,8 @@ namespace asmith { namespace strings {
 	}
 
 	const char* find_upper_case_letter(const char* aStr, size_t aSize) throw() {
-		//! \todo Optimise
-		return find_any(aStr, aSize, UPPER_CASE_LETTERS, LETTER_COUNT);
+		for(size_t i = 0; i < aSize; ++i) if(is_upper_case(aStr[i]) && is_letter(aStr[i])) return aStr + i;
+		return nullptr;
 	}
 
 	const char* find_vowel(const char* aStr) throw() {
@@ -479,15 +479,8 @@ namespace asmith { namespace strings {
 	}
 
 	const char* find_vowel(const char* aStr, size_t aSize) throw() {
-		//! \todo optimise
-		static char VOWELS[VOWEL_COUNT * 2];
-		static bool ONCE = true;
-		if(ONCE) {
-			ONCE = false;
-			memcpy(VOWELS, LOWER_CASE_VOWELS, VOWEL_COUNT);
-			memcpy(VOWELS + VOWEL_COUNT, UPPER_CASE_VOWELS, VOWEL_COUNT);
-		}
-		return find_any(aStr, aSize, VOWELS, VOWEL_COUNT * 2);
+		for(size_t i = 0; i < aSize; ++i) if(is_vowel(aStr[i])) return aStr + i;
+		return nullptr;
 	}
 
 	const char* find_lower_case_vowel(const char* aStr) throw() {
@@ -495,8 +488,8 @@ namespace asmith { namespace strings {
 	}
 
 	const char* find_lower_case_vowel(const char* aStr, size_t aSize) throw() {
-		//! \todo Optimise
-		return find_any(aStr, aSize, LOWER_CASE_VOWELS, VOWEL_COUNT);
+		for(size_t i = 0; i < aSize; ++i) if(is_lower_case(aStr[i]) && is_vowel(aStr[i])) return aStr + i;
+		return nullptr;
 	}
 
 	const char* find_upper_case_vowel(const char* aStr) throw() {
@@ -504,8 +497,8 @@ namespace asmith { namespace strings {
 	}
 
 	const char* find_upper_case_vowel(const char* aStr, size_t aSize) throw() {
-		//! \todo Optimise
-		return find_any(aStr, aSize, UPPER_CASE_VOWELS, VOWEL_COUNT);
+		for(size_t i = 0; i < aSize; ++i) if(is_upper_case(aStr[i]) && is_vowel(aStr[i])) return aStr + i;
+		return nullptr;
 	}
 
 	const char* find_consonant(const char* aStr) throw() {
@@ -513,15 +506,8 @@ namespace asmith { namespace strings {
 	}
 
 	const char* find_consonant(const char* aStr, size_t aSize) throw() {
-		//! \todo optimise
-		static char CONSTONANTS[CONSONANT_COUNT * 2];
-		static bool ONCE = true;
-		if(ONCE) {
-			ONCE = false;
-			memcpy(CONSTONANTS, LOWER_CASE_CONSONANTS, CONSONANT_COUNT);
-			memcpy(CONSTONANTS + CONSONANT_COUNT, UPPER_CASE_CONSONANTS, CONSONANT_COUNT);
-		}
-		return find_any(aStr, aSize, CONSTONANTS, CONSONANT_COUNT * 2);
+		for(size_t i = 0; i < aSize; ++i) if(is_consonant(aStr[i])) return aStr + i;
+		return nullptr;
 	}
 
 	const char* find_lower_case_consonant(const char* aStr) throw() {
@@ -529,8 +515,8 @@ namespace asmith { namespace strings {
 	}
 
 	const char* find_lower_case_consonant(const char* aStr, size_t aSize) throw() {
-		//! \todo Optimise
-		return find_any(aStr, aSize, LOWER_CASE_CONSONANTS, CONSONANT_COUNT);
+		for(size_t i = 0; i < aSize; ++i) if(is_lower_case(aStr[i]) && is_consonant(aStr[i])) return aStr + i;
+		return nullptr;
 	}
 
 	const char* find_upper_case_consonant(const char* aStr) throw() {
@@ -538,8 +524,8 @@ namespace asmith { namespace strings {
 	}
 
 	const char* find_upper_case_consonant(const char* aStr, size_t aSize) throw() {
-		//! \todo Optimise
-		return find_any(aStr, aSize, UPPER_CASE_CONSONANTS, CONSONANT_COUNT);
+		for(size_t i = 0; i < aSize; ++i) if(is_upper_case(aStr[i]) && is_consonant(aStr[i])) return aStr + i;
+		return nullptr;
 	}
 
 }}
