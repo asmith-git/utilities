@@ -160,4 +160,16 @@ namespace asmith {
 		return true;
 	}
 
+	int strcmp_ignore_case(const char* aStr1, const char* aStr2) throw() {
+		while(*aStr1 != '\0') {
+			const char a = to_lower_case(*aStr1);
+			const char b = to_lower_case(*aStr2);
+			if(a < b) return -1;
+			else if (a > b) return 1;
+			++aStr1;
+			++aStr2;
+		}
+		return *aStr2 == '\0' ? 0 : 1;
+	}
+
 }
