@@ -81,7 +81,17 @@ namespace asmith {
 				~checksum ^ FINAL_XOR_VALUE;
 		}
 	};
+	
+	// CRC-8
+	typedef crc<uint8_t,	0x07,		false,	true,	0,			0>		crc_8;
+	typedef crc<uint8_t,	0x39,		true,	true,	0x00,		0x00>	crc_8_darc;
+	typedef crc<uint8_t,	0x1D,		false,	true,	0xFD,		0x00>	crc_8_i_code;
+	typedef crc<uint8_t,	0x07,		false,	true,	0x55,		0x55>	crc_8_itu;		//!\bug Wrong checksum on test
+	typedef crc<uint8_t,	0x131,		true,	true,	0x00,		0x00>	crc_8_maxim;
+	typedef crc<uint8_t,	0x07,		true,	true,	0xFF,		0x00>	crc_8_rohc;
+	typedef crc<uint8_t,	0x9B,		true,	true,	0x00,		0x00>	crc_8_wcdma;
 
-	typedef crc<uint32_t, 0x04C11DB7, true, false, 0xFFFFFFFF, 0xFFFFFFFF> crc_32;
+	// CRC-32
+	typedef crc<uint32_t,	0x04C11DB7,	true,	true,	0xFFFFFFFF,	0xFFFFFFFF> crc_32;
 }
 #endif
