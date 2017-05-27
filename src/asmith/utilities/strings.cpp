@@ -14,9 +14,13 @@
 #include "asmith/utilities/strings.hpp"
 
 namespace asmith {
+
+	enum : char {
+		CASE_DIFFERENCE = 'A' - 'a'
+	};
+
 	char to_upper_case(char aChar) throw() {
-		//! \todo Implement
-		return '\0';
+		return is_upper_case(aChar) ? aChar + CASE_DIFFERENCE : aChar;
 	}
 
 	void to_upper_case(char* aStr) throw() {
@@ -28,8 +32,7 @@ namespace asmith {
 	}
 
 	char to_lower_case(char aChar) throw() {
-		//! \todo Implement
-		return '\0';
+		return is_lower_case(aChar) ? aChar - CASE_DIFFERENCE : aChar;
 	}
 
 	void to_lower_case(char* aStr) throw() {
@@ -41,8 +44,7 @@ namespace asmith {
 	}
 
 	bool is_upper_case(char aChar) throw() {
-		//! \todo Implement
-		return false;
+		return aChar >= 'A' && aChar <= 'Z';
 	}
 
 	bool is_upper_case(const char* aStr) throw() {
@@ -56,8 +58,7 @@ namespace asmith {
 	}
 
 	bool is_lower_case(char aChar) throw() {
-		//! \todo Implement
-		return false;
+		return aChar >= 'a' && aChar <= 'z';
 	}
 
 	bool is_lower_case(const char* aStr) throw() {
@@ -71,8 +72,7 @@ namespace asmith {
 	}
 
 	bool is_letter(char aChar) throw() {
-		//! \todo Implement
-		return false;
+		return is_upper_case(aChar) || is_lower_case(aChar);
 	}
 
 	bool is_letter(const char* aStr) throw() {
@@ -86,8 +86,16 @@ namespace asmith {
 	}
 
 	bool is_vowel(char aChar) throw() {
-		//! \todo Implement
-		return false;
+		switch(to_lower_case(aChar)) {
+		case 'a':
+		case 'e':
+		case 'i':
+		case 'o':
+		case 'u':
+			return true;
+		default:
+			return false;
+		}
 	}
 
 	bool is_vowel(const char* aStr) throw() {
@@ -101,8 +109,7 @@ namespace asmith {
 	}
 
 	bool is_consonant(char aChar) throw() {
-		//! \todo Implement
-		return false;
+		return is_letter(aChar) && ! is_vowel(aChar);
 	}
 
 	bool is_consonant(const char* aStr) throw() {
@@ -116,8 +123,7 @@ namespace asmith {
 	}
 
 	bool is_number(char aChar) throw() {
-		//! \todo Implement
-		return false;
+		return aChar >= '0' && aChar <= '9';
 	}
 
 	bool is_number(const char* aStr) throw() {
