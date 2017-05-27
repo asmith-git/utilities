@@ -438,4 +438,108 @@ namespace asmith { namespace strings {
 		return nullptr;
 	}
 
+	const char* find_number(const char* aStr) throw() {
+		return find_number(aStr, strlen(aStr));
+	}
+
+	const char* find_number(const char* aStr, size_t aSize) throw() {
+		//! \todo Optimise
+		return find_any(aStr, aSize, NUMBERS, NUMBER_COUNT);
+	}
+
+	const char* find_letter(const char* aStr) throw() {
+		return find_letter(aStr, strlen(aStr));
+	}
+
+	const char* find_letter(const char* aStr, size_t aSize) throw() {
+		//! \todo Optimise
+		return find_any(aStr, aSize, LETTERS, LETTER_COUNT * 2);
+	}
+
+	const char* find_lower_case_letter(const char* aStr) throw() {
+		return find_lower_case_letter(aStr, strlen(aStr));
+	}
+
+	const char* find_lower_case_letter(const char* aStr, size_t aSize) throw() {
+		//! \todo Optimise
+		return find_any(aStr, aSize, LOWER_CASE_LETTERS, LETTER_COUNT);
+	}
+
+	const char* find_upper_case_letter(const char* aStr) throw() {
+		return find_upper_case_letter(aStr, strlen(aStr));
+	}
+
+	const char* find_upper_case_letter(const char* aStr, size_t aSize) throw() {
+		//! \todo Optimise
+		return find_any(aStr, aSize, UPPER_CASE_LETTERS, LETTER_COUNT);
+	}
+
+	const char* find_vowel(const char* aStr) throw() {
+		return find_vowel(aStr, strlen(aStr));
+	}
+
+	const char* find_vowel(const char* aStr, size_t aSize) throw() {
+		//! \todo optimise
+		static char VOWELS[VOWEL_COUNT * 2];
+		static bool ONCE = true;
+		if(ONCE) {
+			ONCE = false;
+			memcpy(VOWELS, LOWER_CASE_VOWELS, VOWEL_COUNT);
+			memcpy(VOWELS + VOWEL_COUNT, UPPER_CASE_VOWELS, VOWEL_COUNT);
+		}
+		return find_any(aStr, aSize, VOWELS, VOWEL_COUNT * 2);
+	}
+
+	const char* find_lower_case_vowel(const char* aStr) throw() {
+		return find_lower_case_vowel(aStr, strlen(aStr));
+	}
+
+	const char* find_lower_case_vowel(const char* aStr, size_t aSize) throw() {
+		//! \todo Optimise
+		return find_any(aStr, aSize, LOWER_CASE_VOWELS, VOWEL_COUNT);
+	}
+
+	const char* find_upper_case_vowel(const char* aStr) throw() {
+		return find_upper_case_vowel(aStr, strlen(aStr));
+	}
+
+	const char* find_upper_case_vowel(const char* aStr, size_t aSize) throw() {
+		//! \todo Optimise
+		return find_any(aStr, aSize, UPPER_CASE_VOWELS, VOWEL_COUNT);
+	}
+
+	const char* find_consonant(const char* aStr) throw() {
+		return find_consonant(aStr, strlen(aStr));
+	}
+
+	const char* find_consonant(const char* aStr, size_t aSize) throw() {
+		//! \todo optimise
+		static char CONSTONANTS[CONSONANT_COUNT * 2];
+		static bool ONCE = true;
+		if(ONCE) {
+			ONCE = false;
+			memcpy(CONSTONANTS, LOWER_CASE_CONSONANTS, CONSONANT_COUNT);
+			memcpy(CONSTONANTS + CONSONANT_COUNT, UPPER_CASE_CONSONANTS, CONSONANT_COUNT);
+		}
+		return find_any(aStr, aSize, CONSTONANTS, CONSONANT_COUNT * 2);
+	}
+
+	const char* find_lower_case_consonant(const char* aStr) throw() {
+		return find_lower_case_consonant(aStr, strlen(aStr));
+	}
+
+	const char* find_lower_case_consonant(const char* aStr, size_t aSize) throw() {
+		//! \todo Optimise
+		return find_any(aStr, aSize, LOWER_CASE_CONSONANTS, CONSONANT_COUNT);
+	}
+
+	const char* find_upper_case_consonant(const char* aStr) throw() {
+		return find_upper_case_consonant(aStr, strlen(aStr));
+	}
+
+	const char* find_upper_case_consonant(const char* aStr, size_t aSize) throw() {
+		//! \todo Optimise
+		return find_any(aStr, aSize, UPPER_CASE_CONSONANTS, CONSONANT_COUNT);
+	}
+
 }}
