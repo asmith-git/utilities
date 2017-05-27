@@ -11,8 +11,8 @@
 //	See the License for the specific language governing permissions and
 //	limitations under the License.
 
-#ifndef ASMITH_UTILITIES_HPP
-#define ASMITH_UTILITIES_HPP
+#ifndef ASMITH_UTILITIES_TIMER_HPP
+#define ASMITH_UTILITIES_TIMER_HPP
 
 #include <cstdint>
 #include <chrono>
