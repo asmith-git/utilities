@@ -106,6 +106,13 @@ namespace asmith {
 	typedef crc<uint16_t,	0xA097,		false,	true,	0x0000,		0x0000> crc_16_teledisk;
 	typedef crc<uint16_t,	0x8005,		true,	true,	0x0000,		0xFFFF> crc_16_usb;		//!\bug Wrong checksum on test
 
+	typedef crc<uint16_t,	0x1021,		true ,	true,	0x0000,		0xFFFF> crc_x_25;
+	typedef crc<uint16_t,	0x1021,		false,	true,	0x0000,		0x0000> crc_xmodem;
+	typedef crc<uint16_t,	0x8005,		true ,	true,	0xFFFF,		0x0000> crc_modbus;
+	typedef crc<uint16_t,	0x1021,		true ,	true,	0x0000,		0x0000> crc_kermit;
+	typedef crc<uint16_t,	0x1021,		false,	true,	0xFFFF,		0x0000> crc_ccitt_false;
+	typedef crc<uint16_t,	0x1021,		false,	true,	0x1D0F,		0x0000> crc_aug_ccitt;
+
 	// CRC-24
 	typedef crc<uint32_t,	0x864CFB,	false,	true,	0xB704CE,	0x000000, 24> crc_24;
 	typedef crc<uint32_t,	0x5D6DCB,	false,	true,	0xFEDCBA,	0x000000, 24> crc_24_flexray_a;
