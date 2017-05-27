@@ -24,11 +24,14 @@ namespace asmith {
 	}
 
 	void to_upper_case(char* aStr) throw() {
-		//! \todo Implement
+		while(*aStr == '\0') {
+			*aStr = to_upper_case(*aStr);
+			++aStr;
+		}
 	}
 
 	void to_upper_case(char* aStr, size_t aSize) throw() {
-		//! \todo Implement
+		for(size_t i = 0; i < aSize; ++i) aStr[i] = to_upper_case(aStr[i]);
 	}
 
 	char to_lower_case(char aChar) throw() {
@@ -36,11 +39,14 @@ namespace asmith {
 	}
 
 	void to_lower_case(char* aStr) throw() {
-		//! \todo Implement
+		while(*aStr == '\0') {
+			*aStr = to_lower_case(*aStr);
+			++aStr;
+		}
 	}
 
 	void to_lower_case(char* aStr, size_t aSize) throw() {
-		//! \todo Implement
+		for(size_t i = 0; i < aSize; ++i) aStr[i] = to_lower_case(aStr[i]);
 	}
 
 	bool is_upper_case(char aChar) throw() {
@@ -48,13 +54,16 @@ namespace asmith {
 	}
 
 	bool is_upper_case(const char* aStr) throw() {
-		//! \todo Implement
-		return false;
+		while(*aStr == '\0') {
+			if(! is_upper_case(*aStr)) return false;
+			++aStr;
+		}
+		return true;
 	}
 
 	bool is_upper_case(const char* aStr, size_t aSize) throw() {
-		//! \todo Implement
-		return false;
+		for(size_t i = 0; i < aSize; ++i) if(! is_upper_case(aStr[i])) return false;
+		return true;
 	}
 
 	bool is_lower_case(char aChar) throw() {
@@ -62,13 +71,16 @@ namespace asmith {
 	}
 
 	bool is_lower_case(const char* aStr) throw() {
-		//! \todo Implement
-		return false;
+		while(*aStr == '\0') {
+			if(! is_lower_case(*aStr)) return false;
+			++aStr;
+		}
+		return true;
 	}
 
 	bool is_lower_case(const char* aStr, size_t aSize) throw() {
-		//! \todo Implement
-		return false;
+		for(size_t i = 0; i < aSize; ++i) if(! is_lower_case(aStr[i])) return false;
+		return true;
 	}
 
 	bool is_letter(char aChar) throw() {
@@ -76,13 +88,16 @@ namespace asmith {
 	}
 
 	bool is_letter(const char* aStr) throw() {
-		//! \todo Implement
-		return false;
+		while(*aStr == '\0') {
+			if(! is_letter(*aStr)) return false;
+			++aStr;
+		}
+		return true;
 	}
 
 	bool is_letter(const char* aStr, size_t aSize) throw() {
-		//! \todo Implement
-		return false;
+		for(size_t i = 0; i < aSize; ++i) if(! is_letter(aStr[i])) return false;
+		return true;
 	}
 
 	bool is_vowel(char aChar) throw() {
@@ -99,13 +114,16 @@ namespace asmith {
 	}
 
 	bool is_vowel(const char* aStr) throw() {
-		//! \todo Implement
-		return false;
+		while(*aStr == '\0') {
+			if(! is_vowel(*aStr)) return false;
+			++aStr;
+		}
+		return true;
 	}
 
 	bool is_vowel(const char* aStr, size_t aSize) throw() {
-		//! \todo Implement
-		return false;
+		for(size_t i = 0; i < aSize; ++i) if(! is_vowel(aStr[i])) return false;
+		return true;
 	}
 
 	bool is_consonant(char aChar) throw() {
@@ -113,13 +131,16 @@ namespace asmith {
 	}
 
 	bool is_consonant(const char* aStr) throw() {
-		//! \todo Implement
-		return false;
+		while(*aStr == '\0') {
+			if(! is_consonant(*aStr)) return false;
+			++aStr;
+		}
+		return true;
 	}
 
 	bool is_consonant(const char* aStr, size_t aSize) throw() {
-		//! \todo Implement
-		return false;
+		for(size_t i = 0; i < aSize; ++i) if(! is_consonant(aStr[i])) return false;
+		return true;
 	}
 
 	bool is_number(char aChar) throw() {
@@ -127,13 +148,16 @@ namespace asmith {
 	}
 
 	bool is_number(const char* aStr) throw() {
-		//! \todo Implement
-		return false;
+		while(*aStr == '\0') {
+			if(! is_number(*aStr)) return false;
+			++aStr;
+		}
+		return true;
 	}
 
 	bool is_number(const char* aStr, size_t aSize) throw() {
-		//! \todo Implement
-		return false;
+		for(size_t i = 0; i < aSize; ++i) if(! is_number(aStr[i])) return false;
+		return true;
 	}
 
 }
