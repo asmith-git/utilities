@@ -64,14 +64,23 @@ namespace asmith {
 			return reflect_table(tmp);
 		}
 	public:
-		static checksum_t calculate(const void* aData, size_t aBytes)	{
+		static checksum_t calculate(const void* aData, size_t aBytes) {
+			static checksum_t  LOOKUP[256];
+			static bool ONCE = true;
+			if(ONCE) {
+				ONCE = false;
+				for(size_t i = 0; i < 256; ++i) {
+					LOOKUP[i] = table_value(i);
+				}
+			}
+
 			const uint8_t* const data = static_cast<const uint8_t*>(aData);
 			checksum_t	checksum = INITIAL_VALUE;
 
 			for(size_t i = 0; i < aBytes; ++i) {
 				checksum = REVERSE_DATA ?
-					(checksum >> 8) ^ table_value((checksum & 0xFF) ^ data[i]) :
-					(checksum << 8) ^ table_value(((checksum >> (WIDTH - 8) & 0xFF)) ^ data[i]);
+					(checksum >> 8) ^ LOOKUP[(checksum & 0xFF) ^ data[i]] :
+					(checksum << 8) ^ LOOKUP[((checksum >> (WIDTH - 8) & 0xFF)) ^ data[i]];
 			}
 
 			if((8 * sizeof(checksum_t)) > WIDTH) checksum = checksum & ((1 << WIDTH) - 1);
@@ -105,8 +114,7 @@ namespace asmith {
 	typedef crc<uint16_t,	0x8BB7,		false,	true,	0x0000,		0x0000> crc_16_t10_dif;
 	typedef crc<uint16_t,	0xA097,		false,	true,	0x0000,		0x0000> crc_16_teledisk;
 	typedef crc<uint16_t,	0x8005,		true,	true,	0x0000,		0xFFFF> crc_16_usb;		//!\bug Wrong checksum on test
-
-	typedef crc<uint16_t,	0x1021,		true ,	true,	0x0000,		0xFFFF> crc_x_25;
+	typedef crc<uint16_t,	0x1021,		true ,	true,	0x0000,		0xFFFF> crc_x_25;		//!\bug Wrong checksum on test
 	typedef crc<uint16_t,	0x1021,		false,	true,	0x0000,		0x0000> crc_xmodem;
 	typedef crc<uint16_t,	0x8005,		true ,	true,	0xFFFF,		0x0000> crc_modbus;
 	typedef crc<uint16_t,	0x1021,		true ,	true,	0x0000,		0x0000> crc_kermit;
