@@ -369,6 +369,7 @@ namespace asmith {
 			++byte;
 		}
 
+		if(aBits > 0) dst[byte] = 0;
 		for(uint8_t i = 0; i < aBits; ++i) {
 			if((src[byte] & 1) == 1) dst[byte] |= (1 << ((aBits - 1) - i));
 			dst[byte] = dst[byte] >> 1;
