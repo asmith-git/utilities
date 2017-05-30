@@ -16,12 +16,29 @@
 namespace asmith {
 
 	static constexpr uint8_t REFLECTION_LOOKUP[16] = {
-		0b0001
+		0b0000, // 0000 (0)
+		0b1000, // 0001 (1)
+		0b0100, // 0010 (2)
+		0b1100, // 0011 (3)
+		0b0010, // 0100 (4)
+		0b1010, // 0101 (5)
+		0b0110, // 0110 (6)
+		0b1110, // 0111 (7)
+		0b0001, // 1000 (8)
+		0b1001, // 1001 (9)
+		0b0101, // 1010 (10)
+		0b1101, // 1011 (11)
+		0b0011, // 1100 (12)
+		0b1011, // 1101 (13)
+		0b0111, // 1110 (14)
+		0b1111  // 1111 (15)
 	};
 
 	uint8_t reflect(uint8_t aValue) throw() {
-		//! \todo Implement
-		return 0;
+		uint8_t tmp = 0;
+		tmp |= REFLECTION_LOOKUP[aValue & 15] << 4;
+		tmp |= REFLECTION_LOOKUP[aValue >> 4];
+		return tmp;
 	}
 
 	uint16_t reflect(uint16_t aValue) throw() {
