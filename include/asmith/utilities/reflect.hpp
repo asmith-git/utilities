@@ -26,6 +26,7 @@ namespace asmith {
 	int16_t reflect(int16_t) throw();
 	int32_t reflect(int32_t) throw();
 	int64_t reflect(int64_t) throw();
+	void reflect(const void*, void*, size_t) throw();
 }
 
 #endif

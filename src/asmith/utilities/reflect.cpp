@@ -12,6 +12,7 @@
 //	limitations under the License.
 
 #include "asmith/utilities/reflect.hpp"
+#include <algorithm>
 
 namespace asmith {
 
@@ -356,4 +357,24 @@ namespace asmith {
 		return tmp;
 	}
 
+	void reflect(const void* aInput, void* aOutput, size_t aBits) throw() {
+		// Reflect byte values
+		const uint8_t* const src = reinterpret_cast<const uint8_t*>(aInput);
+		uint8_t* const dst = reinterpret_cast<uint8_t*>(aOutput);
+		size_t byte = 0;
+
+		while(aBits >= 8) {
+			aBits -= 8;
+			dst[byte] = REFLECTION_LOOKUP[src[byte]];
+			++byte;
+		}
+
+		for(uint8_t i = 0; i < aBits; ++i) {
+			if((src[byte] & 1) == 1) dst[byte] |= (1 << ((aBits - 1) - i));
+			dst[byte] = dst[byte] >> 1;
+		}
+
+		// Reverse byte order
+		std::reverse(dst, dst+byte);
+	}
 }
