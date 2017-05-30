@@ -14,7 +14,7 @@
 #ifndef ASMITH_UTILITIES_CRC_HPP
 #define ASMITH_UTILITIES_CRC_HPP
 
-#include <cstdint>
+#include "reflect.hpp"
 
 namespace asmith {
 	template<class T, uint64_t POLYNOMIAL, bool REVERSE_DATA, bool REVERSED_OUT, uint64_t INITIAL_VALUE, uint64_t FINAL_XOR_VALUE, size_t WIDTH = 8 * sizeof(T)>
@@ -23,32 +23,30 @@ namespace asmith {
 		typedef T checksum_t;
 	private:
 		template<bool R = REVERSE_DATA>
-		static typename std::enable_if<R, uint8_t>::type reflect_byte(const uint8_t aByte) {
-			return reflect((aByte), 8) & 0xFF;
+		static inline typename std::enable_if<R, uint8_t>::type reflect_byte(const uint8_t aByte) {
+			return asmith::reflect(aByte);
 		}
 
 		template<bool R = REVERSE_DATA>
-		static typename std::enable_if<! R, uint8_t>::type reflect_byte(const uint8_t aByte) {
+		static inline typename std::enable_if<! R, uint8_t>::type reflect_byte(const uint8_t aByte) {
 			return aByte;
 		}
 
-		template<bool R = REVERSE_DATA>
-		static typename std::enable_if<R, checksum_t>::type reflect_table(checksum_t aValue) {
-			return reflect(aValue, WIDTH);
+		template<bool R = REVERSE_DATA, size_t W = WIDTH>
+		static inline typename std::enable_if<R && (W == 8 || W == 16 || W == 32 || W == 64) && sizeof(checksum_t) * 8 == W, checksum_t>::type reflect_table(checksum_t aValue) {
+			return asmith::reflect(aValue);
 		}
 
-		template<bool R = REVERSE_DATA>
-		static typename std::enable_if<!R, checksum_t>::type reflect_table(checksum_t aValue) {
-			return aValue;
-		}
-
-		static checksum_t reflect(checksum_t aValue, uint8_t aBits) {
+		template<bool R = REVERSE_DATA, size_t W = WIDTH>
+		static inline typename std::enable_if<R && ((W != 8 && W != 16 && W != 32 && W != 64) || sizeof(checksum_t) * 8 != W), checksum_t>::type reflect_table(checksum_t aValue) {
 			checksum_t tmp = 0;
-			for(uint8_t i = 0; i < aBits; ++i) {
-				if((aValue & 1) == 1) tmp |= (1 << ((aBits - 1) - i));
-				aValue = aValue >> 1;
-			}
+			asmith::reflect(&aValue, &tmp, WIDTH);
 			return tmp;
+		}
+
+		template<bool R = REVERSE_DATA>
+		static inline typename std::enable_if<!R, checksum_t>::type reflect_table(checksum_t aValue) {
+			return aValue;
 		}
 
 		static checksum_t table_value(uint8_t aIndex) {
