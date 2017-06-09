@@ -17,23 +17,23 @@
 namespace asmith {
 
 	namespace implementation {
-		template<class I, bool SAMPLE>
-		double standard_deviation(const I aBegin, const I aEnd) {
+		template<class I>
+		double standard_deviation(const I aBegin, const I aEnd, const bool aSample) {
 			// Calculate the mean
 			size_t size = 0;
 			double mean = 0.0;
-			for (I i = aBegin; i != aEnd; ++i, ++size) {
+			for(I i = aBegin; i != aEnd; ++i, ++size) {
 				mean += static_cast<double>(*i);
 			}
 			mean /= static_cast<double>(size);
 
 			// Calculate the variance
 			double variance = 0.0;
-			for (I i = aBegin; i != aEnd; ++i) {
+			for(I i = aBegin; i != aEnd; ++i) {
 				const double dif = *i - mean;
 				variance += dif * dif;
 			}
-			variance /= static_cast<double>(SAMPLE ? size - 1 : size);
+			variance /= static_cast<double>(aSample ? size - 1 : size);
 
 			// Calculate the standard deviation
 			return std::sqrt(variance);
@@ -42,12 +42,12 @@ namespace asmith {
 
 	template<class I>
 	inline double standard_deviation_population(const I aBegin, const I aEnd) {
-		return implementation::standard_deviation<I, false>(aBegin, aEnd);
+		return implementation::standard_deviation<I>(aBegin, aEnd, false);
 	}
 
 	template<class I>
 	double standard_deviation_sample(const I aBegin, const I aEnd) {
-		return implementation::standard_deviation<I, true>(aBegin, aEnd);
+		return implementation::standard_deviation<I>(aBegin, aEnd, true);
 	}
 }
 #endif
