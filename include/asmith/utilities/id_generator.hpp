@@ -31,7 +31,7 @@ namespace asmith {
 	public:
 		typedef T id_t;
 
-		virtual ~id_generator() {}
+		virtual ~id_generator() throw() {}
 
 		virtual T generate() throw() = 0;
 		virtual bool use(T) throw() = 0;
@@ -54,7 +54,7 @@ namespace asmith {
 		std::vector<T> mFree;
 		uint64_t mBase;
 	public:
-		id_generator_example() :
+		id_generator_example() throw() :
 			mBase(0)
 		{}
 
