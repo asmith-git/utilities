@@ -69,8 +69,12 @@ namespace asmith {
 				return id;
 			}else while(true) {
 				id = static_cast<T>(mBase++);
-				for(const T i : mUsed) if(i == id) continue;
-				return id;
+				bool free = true;
+				for(const T i : mUsed) if (i == id) {
+					free = false;
+					break;
+				}
+				if(free) return id;
 			}
 			return static_cast<T>(0);
 		}
