@@ -13,6 +13,7 @@
 
 #include "asmith/utilities/strings.hpp"
 #include <cstring>
+#include <cmath>
 
 namespace asmith { namespace strings {
 
@@ -633,25 +634,34 @@ namespace asmith { namespace strings {
 	}
 
 	const char* read_d(const char* aPos, double& aValue) throw() {
-		int64_t a;
-		uint64_t b;
-		const char* p = read_64i(aPos, a);
-		if(p == aPos) return aPos;
-
-		if(p[0] != '.') {
-			aValue = static_cast<double>(a);
-			return p;
+		const char* p = aPos;
+		int64_t sign = 1;
+		if(*p == '-') {
+			sign = -1;
+			++p;
+		}else if (*p == '+') {
+			++p;
 		}
-		++p;
-		const char* p2 = read_64u(p, b);
-		const uint8_t count = p2 - p;
+
+		uint64_t a;
+		uint64_t b;
+		const char* p2 = read_64u(p, a);
+		if(p2 == p) return aPos;
+
+		if(p2[0] != '.') {
+			aValue = static_cast<double>(a);
+			return p2;
+		}
+		++p2;
+		const char* p3 = read_64u(p2, b);
+		const uint8_t count = p3 - p2;
 		if(count == 0) return aPos;
 		
-		double ad = static_cast<double>(a);
-		double bd = static_cast<double>(b) / POWERS_OF_10[count];
+		const double ad = static_cast<double>(a);
+		const double bd = static_cast<double>(b) / POWERS_OF_10[count];
 
-		aValue = ad + bd;
-		return p2;
+		aValue = sign * (ad + bd);
+		return p3;
 	}
 
 }}
