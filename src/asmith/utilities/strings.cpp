@@ -582,7 +582,7 @@ namespace asmith { namespace strings {
 		}
 
 		aValue = 0;
-		for(int i = count-1; i >= 0; --i) {
+		for(uint8_t i = 0; i < count; ++i) {
 			aValue += static_cast<uint64_t>(aPos[i] - '0') * POWERS_OF_10[count - 1 - i];
 		}
 
