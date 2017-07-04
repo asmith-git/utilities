@@ -528,4 +528,130 @@ namespace asmith { namespace strings {
 		return nullptr;
 	}
 
+	enum {
+		MAX_INTEGER_LENGTH = 16
+	};
+
+	const uint64_t POWERS_OF_10[MAX_INTEGER_LENGTH]{
+		1UL,
+		10UL,
+		100UL,
+		1000UL,
+		10000UL,
+		100000UL,
+		1000000UL,
+		10000000UL,
+		100000000UL,
+		1000000000UL,
+		10000000000UL,
+		100000000000UL,
+		1000000000000UL,
+		10000000000000UL,
+		100000000000000UL,
+		1000000000000000UL
+	};
+
+	//! \todo Read numbers in scientific notation
+
+	const char* read_8u(const char* aPos, uint8_t& aValue) throw() {
+		uint64_t tmp;
+		aPos = read_64u(aPos, tmp);
+		aValue = static_cast<uint8_t>(tmp);
+		return aPos;
+	}
+
+	const char* read_16u(const char* aPos, uint16_t& aValue) throw() {
+		uint64_t tmp;
+		aPos = read_64u(aPos, tmp);
+		aValue = static_cast<uint16_t>(tmp);
+		return aPos;
+	}
+
+	const char* read_32u(const char* aPos, uint32_t& aValue) throw() {
+		uint64_t tmp;
+		aPos = read_64u(aPos, tmp);
+		aValue = static_cast<uint32_t>(tmp);
+		return aPos;
+	}
+
+	const char* read_64u(const char* aPos, uint64_t& aValue) throw() {
+		uint8_t count = 0;
+		while(aPos[count] >= '0' && aPos[count] <= '9') {
+			++count;
+		}
+
+		aValue = 0;
+		for(int i = count-1; i >= 0; --i) {
+			aValue += static_cast<uint64_t>(aPos[i] - '0') * POWERS_OF_10[count - 1 - i];
+		}
+
+		return aPos + count;
+	}
+
+	const char* read_8i(const char* aPos, int8_t& aValue) throw() {
+		int64_t tmp;
+		aPos = read_64i(aPos, tmp);
+		aValue = static_cast<int8_t>(tmp);
+		return aPos;
+	}
+
+	const char* read_16i(const char* aPos, int16_t& aValue) throw() {
+		int64_t tmp;
+		aPos = read_64i(aPos, tmp);
+		aValue = static_cast<int16_t>(tmp);
+		return aPos;
+	}
+
+	const char* read_32i(const char* aPos, int32_t& aValue) throw() {
+		int64_t tmp;
+		aPos = read_64i(aPos, tmp);
+		aValue = static_cast<int32_t>(tmp);
+		return aPos;
+	}
+
+	const char* read_64i(const char* aPos, int64_t& aValue) throw() {
+		const char* p = aPos;
+		int64_t sign = 1;
+		if(*p == '-') {
+			sign = -1;
+			++p;
+		}else if(*p == '+') {
+			++p;
+		}
+		uint64_t val;
+		const char* p2 = read_64u(p, val);
+		if(p2 == p) return aPos;
+		aValue = sign * static_cast<int64_t>(val);
+		return p2;
+	}
+
+	const char* read_f(const char* aPos, float& aValue) throw() {
+		double tmp;
+		aPos = read_d(aPos, tmp);
+		aValue = static_cast<float>(tmp);
+		return aPos;
+	}
+
+	const char* read_d(const char* aPos, double& aValue) throw() {
+		int64_t a;
+		uint64_t b;
+		const char* p = read_64i(aPos, a);
+		if(p == aPos) return aPos;
+
+		if(p[0] != '.') {
+			aValue = static_cast<double>(a);
+			return p;
+		}
+		++p;
+		const char* p2 = read_64u(p, b);
+		const uint8_t count = p2 - p;
+		if(count == 0) return aPos;
+		
+		double ad = static_cast<double>(a);
+		double bd = static_cast<double>(b) / POWERS_OF_10[count];
+
+		aValue = ad + bd;
+		return p2;
+	}
+
 }}

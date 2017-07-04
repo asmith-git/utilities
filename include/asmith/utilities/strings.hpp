@@ -14,6 +14,8 @@
 #ifndef ASMITH_UTILITIES_STRINGS_HPP
 #define ASMITH_UTILITIES_STRINGS_HPP
 
+#include <cstdint>
+
 namespace asmith { namespace strings {
 
 	char to_upper_case(char) throw();
@@ -83,5 +85,16 @@ namespace asmith { namespace strings {
 	const char* find_lower_case_consonant(const char*, size_t) throw();
 	const char* find_upper_case_consonant(const char*) throw();
 	const char* find_upper_case_consonant(const char*, size_t) throw();
+
+	const char* read_8u(const char*, uint8_t&) throw();
+	const char* read_16u(const char*, uint16_t&) throw();
+	const char* read_32u(const char*, uint32_t&) throw();
+	const char* read_64u(const char*, uint64_t&) throw();
+	const char* read_8i(const char*, int8_t&) throw();
+	const char* read_16i(const char*, int16_t&) throw();
+	const char* read_32i(const char*, int32_t&) throw();
+	const char* read_64i(const char*, int64_t&) throw();
+	const char* read_f(const char*, float&) throw();
+	const char* read_d(const char*, double&) throw();
 }}
 #endif
