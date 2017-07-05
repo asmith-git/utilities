@@ -102,11 +102,11 @@ namespace asmith { namespace strings {
 	const char* read_d(const char*, double&) throw();
 
 	const char* skip(const char*, const char*, size_t) throw();
-	inline const char* skip(const char* aStr, bool(*aCondition)(char)) throw() { while(aCondition(*aStr)) ++aStr; return aStr; }
-	const char* skip_whitespace(const char* aStr) throw() { return skip(aStr, is_whitespace); }
-	const char* skip_letters(const char* aStr) throw() { return skip(aStr, is_letter); }
-	const char* skip_lower_case(const char* aStr) throw() { return skip(aStr, is_lower_case); }
-	const char* skip_upper_case(const char* aStr) throw() { return skip(aStr, is_upper_case); }
-	const char* skip_numbers(const char* aStr) throw() { return skip(aStr, is_number); }
+	const char* skip(const char* aStr, bool(*aCondition)(char)) throw();
+	const char* skip_whitespace(const char* aStr) throw();
+	const char* skip_letters(const char* aStr) throw();
+	const char* skip_lower_case(const char* aStr) throw();
+	const char* skip_upper_case(const char* aStr) throw();
+	const char* skip_numbers(const char* aStr) throw();
 }}
 #endif
