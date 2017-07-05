@@ -287,6 +287,39 @@ namespace asmith { namespace strings {
 	}
 	
 	/*!
+		\brief Check if a character is a whitespace.
+		\param aChar The character to check.
+		\return True if the character is a in the range 0-9
+	*/
+	bool is_whitespace(char aChar) throw() {
+		return aChar == ' ' || aChar == '\f' || aChar == '\n' || aChar == '\r' || aChar == 't' || aChar == '\v';
+	}
+	
+	/*!
+		\brief Check if a string is composed of whitespace characters.
+		\param aStr The string to check.
+		\return True if all characters are in the range 0-9
+	*/
+	bool is_whitespace(const char* aStr) throw() {
+		while(*aStr == '\0') {
+			if(!is_whitespace(*aStr)) return false;
+			++aStr;
+		}
+		return true;
+	}
+	
+	/*!
+		\brief Check if a string is composed of whitespace characters.
+		\param aStr The string to check.
+		\param aSize The size of aStr.
+		\return True if all characters are in the range 0-9
+	*/
+	bool is_whitespace(const char* aStr, size_t aSize) throw() {
+		for(size_t i = 0; i < aSize; ++i) if(! is_whitespace(aStr[i])) return false;
+		return true;
+	}
+	
+	/*!
 		\brief Compare if two strings while ignoring case.
 		\param aStr1 The first string.
 		\param aStr2 The second string.
@@ -662,6 +695,16 @@ namespace asmith { namespace strings {
 
 		aValue = sign * (ad + bd);
 		return p3;
+	}
+
+	const char* skip(const char* aStr, const char* aChars, size_t aCount) throw() {
+		for(size_t i = 0; i < aCount; ++i) {
+			if(*aStr == aChars[i]) {
+				++aStr;
+				i = 0;
+			}
+		}
+		return aStr;
 	}
 
 }}
